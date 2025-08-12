@@ -54,15 +54,15 @@ public class UsersController {
 	
 	@PutMapping("/update/{id}")
 	public String updateUser(@PathVariable String id ,@RequestBody User updatedUser) throws NoUserFoundException {
-		User user = users.stream().filter(u -> u.getId().equals(id)).findFirst().orElse(null);
-		if(user == null)
+		User existingUser = users.stream().filter(u -> u.getId().equals(id)).findFirst().orElse(null);
+		if(existingUser == null)
 			throw new NoUserFoundException("No user found with given id : " + id);
 		else {			
-			user.setName(updatedUser.getName());
-			user.setAddress(updatedUser.getAddress());
-			user.setEmail(updatedUser.getEmail());
-			user.setPassword(updatedUser.getPassword());
-			user.setPhoneNumber(updatedUser.getPhoneNumber());
+			existingUser.setName(updatedUser.getName());
+			existingUser.setAddress(updatedUser.getAddress());
+			existingUser.setEmail(updatedUser.getEmail());
+			existingUser.setPassword(updatedUser.getPassword());
+			existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
 		}	
 		return "User update successfully";
 	}
