@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +51,19 @@ public class UsersController {
 		users.add(newUser);
 		return "new user added successfully";
 	}
-
 	
+	@PutMapping("/update/{id}")
+	public String updateUser(@PathVariable String id ,@RequestBody User updatedUser) throws NoUserFoundException {
+		User user = users.stream().filter(u -> u.getId().equals(id)).findFirst().orElse(null);
+		if(user == null)
+			throw new NoUserFoundException("No user found with given id : " + id);
+		else {			
+			user.setName(updatedUser.getName());
+			user.setAddress(updatedUser.getAddress());
+			user.setEmail(updatedUser.getEmail());
+			user.setPassword(updatedUser.getPassword());
+			user.setPhoneNumber(updatedUser.getPhoneNumber());
+		}	
+		return "User update successfully";
+	}
 }
