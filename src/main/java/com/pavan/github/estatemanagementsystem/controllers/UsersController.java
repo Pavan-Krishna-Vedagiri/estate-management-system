@@ -3,6 +3,7 @@ package com.pavan.github.estatemanagementsystem.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,5 +66,16 @@ public class UsersController {
 			existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
 		}	
 		return "User update successfully";
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public String deleteUser(@PathVariable String id) throws NoUserFoundException {
+		User existingUser = users.stream().filter(u -> u.getId().equals(id)).findFirst().orElse(null);
+		if(existingUser == null)
+			throw new NoUserFoundException("No user found with given id : " + id);
+		else {		
+			users.remove(existingUser);
+		}	
+		return "User deleted successfully";
 	}
 }
