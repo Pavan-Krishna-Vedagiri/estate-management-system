@@ -1,6 +1,5 @@
 package com.pavan.github.estatemanagementsystem.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pavan.github.estatemanagementsystem.exceptions.NoUserFoundException;
-import com.pavan.github.estatemanagementsystem.modals.Address;
 import com.pavan.github.estatemanagementsystem.modals.User;
 import com.pavan.github.estatemanagementsystem.services.UserManagementService;
 
