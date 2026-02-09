@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.pavan.github.estatemanagementsystem.modals.Address;
-import com.pavan.github.estatemanagementsystem.modals.User;
+import com.pavan.github.estatemanagementsystem.entities.Address;
+import com.pavan.github.estatemanagementsystem.entities.User;
 
 @Repository
 public class UserRepo {
