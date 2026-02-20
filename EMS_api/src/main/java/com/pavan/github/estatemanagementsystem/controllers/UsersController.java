@@ -2,6 +2,7 @@ package com.pavan.github.estatemanagementsystem.controllers;
 
 import java.util.List;
 
+import com.pavan.github.estatemanagementsystem.constants.UrlConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +18,14 @@ import com.pavan.github.estatemanagementsystem.entities.User;
 import com.pavan.github.estatemanagementsystem.services.UserManagementService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping(UrlConstants.USERS)
 public class UsersController {
-	
-	@Autowired
-	private UserManagementService userManagementService;
-	
-	@GetMapping("/")
-	public List<User> getAllUsers(){
-		return userManagementService.getAllUsers();
-	}
+
+	private final UserManagementService userManagementService;
+
+    public UsersController(UserManagementService userManagementService) {
+        this.userManagementService = userManagementService;
+    }
 	
 	@GetMapping("/{id}")
 	public User getUserById(@PathVariable String id) throws NoUserFoundException {
