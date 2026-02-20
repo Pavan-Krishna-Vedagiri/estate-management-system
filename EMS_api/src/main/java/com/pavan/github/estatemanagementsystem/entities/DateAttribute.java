@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Roles extends DateAttribute{
+public class DateAttribute {
 
-    private String roleId;
-    private String roleName;
-    private String description;
+    private Date createdTimeStamp;
+    private Date lastUpdateTimeStamp;
 
 }

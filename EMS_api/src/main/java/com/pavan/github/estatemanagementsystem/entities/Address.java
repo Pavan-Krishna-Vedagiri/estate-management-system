@@ -2,17 +2,20 @@ package com.pavan.github.estatemanagementsystem.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
-    private String id;         // Primary key
-    private String doorNo;     // Not null
-    private String street;     // Not null
-    private String city;       // Not null
-    private String country;    // Optional
-    private String pincode;     // Optional
+public class Address extends DateAttribute{
+
+    private String id;
+    private String doorNo;
+    private String street;
+    private String city;
+    private String country;
+    private String pincode;
 
 }
