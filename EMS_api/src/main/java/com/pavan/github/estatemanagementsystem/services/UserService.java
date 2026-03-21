@@ -2,23 +2,23 @@ package com.pavan.github.estatemanagementsystem.services;
 
 import java.util.List;
 
+import com.pavan.github.estatemanagementsystem.repositories.UserRepo;
 import org.springframework.stereotype.Service;
 
-import com.pavan.github.estatemanagementsystem.repositories.UserRepo;
 import com.pavan.github.estatemanagementsystem.exceptions.NoUserFoundException;
 import com.pavan.github.estatemanagementsystem.entities.User;
 
 @Service
-public class UserManagementService {
+public class UserService {
 
 	private final UserRepo userRepo;
 
-    public UserManagementService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
     public List<User> getAllUsers() {
-		return userRepo.fetchAllUsers();
+		return userRepo.findAll();
 	}
 
 	public User getUserById(String id) throws NoUserFoundException {
@@ -26,29 +26,26 @@ public class UserManagementService {
 	}
 
 	public String addUser(User newUser) {
-		return userRepo.addUser(newUser) ?  "new user added successfully" : "Cannot add the user";
+		userRepo.save(newUser);
+		return "User added successfully";
 	}
 
 	public String updateUser( String id,  User updatedUser) throws NoUserFoundException {
-		User existingUser = UserRepo.users.stream().filter(u -> u.getUserId().equals(id)).findFirst().orElse(null);
+		User existingUser = userRepo.findById(id).orElse(null);
 		if (existingUser == null)
 			throw new NoUserFoundException("No user found with given id : " + id);
 		else {
-			existingUser.setName(updatedUser.getName());
-			existingUser.setAddress(updatedUser.getAddress());
-			existingUser.setEmail(updatedUser.getEmail());
-			existingUser.setPassword(updatedUser.getPassword());
-			existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
+			userRepo.save(updatedUser);
 		}
 		return "User update successfully";
 	}
 
 	public String deleteUser( String id) throws NoUserFoundException {
-		User existingUser = UserRepo.users.stream().filter(u -> u.getUserId().equals(id)).findFirst().orElse(null);
+		User existingUser = userRepo.findById(id).orElse(null);
 		if (existingUser == null)
 			throw new NoUserFoundException("No user found with given id : " + id);
 		else {
-			UserRepo.users.remove(existingUser);
+			userRepo.delete(existingUser);
 		}
 		return "User deleted successfully";
 	}

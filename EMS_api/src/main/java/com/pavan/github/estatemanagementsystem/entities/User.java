@@ -1,5 +1,9 @@
 package com.pavan.github.estatemanagementsystem.entities;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,13 +15,26 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "user")
 public class User extends DateAttribute {
+
+    @Id
+    @Column(name = "user_id")
     private String userId;
-    private String name;         
-    private String email;        
-    private String phoneNumber;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "mobile_number")
+    private String mobileNumber;
+
+    @Column(name = "password")
     private String password;
-    private Address address;
-    private List<String> rolesId;
+
+    @OneToOne
+    private UserAddress propertyAddress;
 
 }

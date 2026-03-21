@@ -10,10 +10,11 @@ public final class UrlConstants {
     public static final String USERS = API_BASE + "/users";
     public static final String ROOMS = API_BASE + "/rooms";
     public static final String OWNERS = API_BASE + "/owners";
+    public static final String BOOK_ROOM = API_BASE + "/book-room";
 
     // User endpoints
     public static final String CREATE_USER = "";
-    public static final String GET_USERS_BY_ID = "/{id}";
+    public static final String USERS_BY_ID = "/{id}";
     public static final String UPDATE_USERS = "/{id}";
     public static final String DELETE_USERS = "/{id}";
 

@@ -12,29 +12,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "room")
-public class Room extends DateAttribute{
+@Entity(name = "pricing_method")
+public class PricingMethod extends DateAttribute{
 
     @Id
-    @Column(name = "room_id")
-    private String roomId;
+    @Column(name = "pricing_method_id")
+    private String pricingMethodId;
 
-    @Column(name = "property_id")
-    private String propertyId;
-
-    @Column(name = "room_Number")
-    private String roomNumber;
+    @Column(name = "pricing_method_name")
+    private String pricingMethodName;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "floor")
-    private String floor;
+    @Column(name = "price")
+    private String price;
 
-    @Column(name = "sharing")
-    private Integer sharing;
-
-    @Column(name = "number_of_beds")
-    private Integer numberOfBeds;
+    @Column(name = "charge_code")
+    private String chargeCode;
 
 }

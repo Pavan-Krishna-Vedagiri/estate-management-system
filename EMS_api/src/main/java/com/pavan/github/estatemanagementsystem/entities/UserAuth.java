@@ -1,5 +1,7 @@
 package com.pavan.github.estatemanagementsystem.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
@@ -8,8 +10,10 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "user_auth")
 public class UserAuth extends DateAttribute{
 
+    @Id
     private String userId;
     private String username;
     private String password;

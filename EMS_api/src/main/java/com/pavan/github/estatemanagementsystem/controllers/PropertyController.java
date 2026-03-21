@@ -4,11 +4,13 @@ import com.pavan.github.estatemanagementsystem.constants.UrlConstants;
 import com.pavan.github.estatemanagementsystem.entities.Property;
 import com.pavan.github.estatemanagementsystem.entities.Room;
 import com.pavan.github.estatemanagementsystem.services.PropertyService;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller(UrlConstants.PROPERTIES)
+@RestController
+@RequestMapping(UrlConstants.PROPERTIES)
+@CrossOrigin(origins = "http://localhost:4200")
 public class PropertyController {
 
     private final PropertyService propertyService;
@@ -17,10 +19,12 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    public Property getPropertyById(String id) {
-        return propertyService.getPropertyById(id);
+    @GetMapping("/{id}")
+    public Property getPropertyById(@PathVariable("id") String propertyId) {
+        return propertyService.getPropertyById(propertyId);
     }
 
+    @GetMapping
     public List<Property> getAllProperties() {
         return propertyService.getAllProperties();
     }
@@ -28,4 +32,15 @@ public class PropertyController {
     public List<Room> getRooms(String propertyId) {
         return propertyService.getAllRooms(propertyId);
     }
+
+    @DeleteMapping("/{id}")
+    public Boolean deletePropertyById(@PathVariable("id") String propertyId) {
+        return propertyService.deletePropertyById(propertyId);
+    }
+
+    @PostMapping
+    public boolean createProperty(@RequestBody Property property) {
+        return propertyService.createProperty(property);
+    }
+
 }
