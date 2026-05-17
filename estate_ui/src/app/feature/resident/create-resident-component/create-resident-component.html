@@ -1,0 +1,86 @@
+<p>Add Resident</p>
+
+<form [formGroup]="residentForm" (ngSubmit)="onSubmit()">
+
+  <p>
+    <label for="firstName">First Name:</label>
+    <input id="firstName" type="text" formControlName="firstName">
+  </p>
+
+  <p>
+    <label for="lastName">Last Name:</label>
+    <input id="lastName" type="text" formControlName="lastName">
+  </p>
+
+  <p>
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email">
+  </p>
+
+  <p>
+    <label for="phoneNumber">Phone Number:</label>
+    <input id="phoneNumber" type="text" formControlName="phoneNumber">
+  </p>
+
+  <p>
+    <label for="guardianName">Guardian Name:</label>
+    <input id="guardianName" type="text" formControlName="guardianName">
+  </p>
+
+  <p>
+    <label for="guardianEmail">Guardian Email:</label>
+    <input id="guardianEmail" type="email" formControlName="guardianEmail">
+  </p>
+
+  <p>
+    <label for="guardianPhoneNumber">Guardian Phone Number:</label>
+    <input id="guardianPhoneNumber" type="text" formControlName="guardianPhoneNumber">
+  </p>
+
+  <p>
+    <label for="socialSecurityNumber">Social Security Number:</label>
+    <input id="socialSecurityNumber" type="text" formControlName="socialSecurityNumber">
+  </p>
+
+  <p>
+    <label for="occupationName">Occupation:</label>
+    <input id="occupationName" type="text" formControlName="occupationName">
+  </p>
+
+  <p>
+    <label for="companyName">Company:</label>
+    <input id="companyName" type="text" formControlName="companyName">
+  </p>
+
+  <!-- ✅ Nested Address FormGroup -->
+  <div formGroupName="address">
+    <h4>Address</h4>
+
+    <p>
+      <label for="doorNo">Door No:</label>
+      <input id="doorNo" type="text" formControlName="doorNo">
+    </p>
+
+    <p>
+      <label for="street">Street:</label>
+      <input id="street" type="text" formControlName="street">
+    </p>
+
+    <p>
+      <label for="city">City:</label>
+      <input id="city" type="text" formControlName="city">
+    </p>
+
+    <p>
+      <label for="country">Country:</label>
+      <input id="country" type="text" formControlName="country">
+    </p>
+
+    <p>
+      <label for="pincode">Pincode:</label>
+      <input id="pincode" type="text" formControlName="pincode">
+    </p>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>

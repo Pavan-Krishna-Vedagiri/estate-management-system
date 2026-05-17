@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends DateAttribute {
+
     private String userId;
     private String name;         
     private String email;        
