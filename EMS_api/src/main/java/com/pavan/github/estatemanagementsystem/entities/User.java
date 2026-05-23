@@ -14,8 +14,8 @@ import java.util.List;
 public class User extends DateAttribute {
 
     private String userId;
-    private String name;         
-    private String email;        
+    private String name;
+    private String email;
     private String phoneNumber;
     private String password;
     private Address address;

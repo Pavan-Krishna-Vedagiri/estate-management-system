@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Roles extends DateAttribute{
+public class Roles extends DateAttribute {
 
     private String roleId;
     private String roleName;

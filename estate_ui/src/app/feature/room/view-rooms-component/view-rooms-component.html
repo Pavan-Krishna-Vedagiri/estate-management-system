@@ -1,0 +1,41 @@
+<h1>Rooms</h1>
+
+<div class="resident-list">
+    <table class="resident-table">
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Floor</th>
+                <th>Total Beds</th>
+                <th>Available Beds</th>
+                <th>Sharing</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (rooms$ | async; as room ) {
+            @for (room of rooms$ | async; track room.roomId) {
+            <tr>
+                <td>{{ room.roomNumber }}</td>
+                <td>{{ room.floor }}</td>
+                <td>{{ room.numberOfBeds }}</td>
+                <td [class.text-danger]="room.availableBeds == 0" [class.text-success]="room.availableBeds > 0">{{
+                    room.availableBeds }}</td>
+                <td>{{ room.sharing }}</td>
+                <td>{{ room.description }}</td>
+                <td>
+                    <button class="edit-btn" (click)="getBookingDetail(room.roomId)">
+                        ✏️ Edit
+                    </button>
+                </td>
+            </tr>
+            }
+            }@else {
+            <tr>
+                <td colspan="8" class="no-data">No Room for this property found</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

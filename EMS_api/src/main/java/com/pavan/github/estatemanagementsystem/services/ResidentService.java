@@ -3,12 +3,11 @@ package com.pavan.github.estatemanagementsystem.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pavan.github.estatemanagementsystem.constants.ResponseConstants;
-import com.pavan.github.estatemanagementsystem.dto.response.CommonResponseDto;
-import com.pavan.github.estatemanagementsystem.dto.ResidentsListDto;
 import com.pavan.github.estatemanagementsystem.dto.ResidentDto;
+import com.pavan.github.estatemanagementsystem.dto.ResidentsListDto;
+import com.pavan.github.estatemanagementsystem.dto.response.CommonResponseDto;
 import com.pavan.github.estatemanagementsystem.entities.Resident;
 import com.pavan.github.estatemanagementsystem.repositories.ResidentRepo;
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -45,7 +44,8 @@ public class ResidentService {
                 }
                 """, residents.getTotalPages(), residents.getTotalElements(), residents.getNumber(), residents.getSize());
         ResidentsListDto residentsListDto = new ResidentsListDto();
-        List<ResidentDto> responseDtos = objectMapper.convertValue(residents.get(), new TypeReference<List<ResidentDto>>(){});
+        List<ResidentDto> responseDtos = objectMapper.convertValue(residents.get(), new TypeReference<List<ResidentDto>>() {
+        });
         residentsListDto.setResidents(responseDtos);
         CommonResponseDto<ResidentsListDto> response = CommonResponseDto.<ResidentsListDto>builder()
                 .responseId(UUID.randomUUID().toString())
@@ -71,9 +71,9 @@ public class ResidentService {
     }
 
     @Transactional
-    public ResponseEntity<CommonResponseDto<Map<String,String>>> addResident(ResidentDto resident) {
+    public ResponseEntity<CommonResponseDto<Map<String, String>>> addResident(ResidentDto resident) {
 
-        Map<String,String> data = new HashMap<>();
+        Map<String, String> data = new HashMap<>();
 
         Resident newResident = objectMapper.convertValue(resident, Resident.class);
         newResident.setId(sequenceService.nextSequenceValue("RESIDENT_SEQUENCE"));

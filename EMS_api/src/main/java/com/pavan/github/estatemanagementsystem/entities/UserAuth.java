@@ -2,12 +2,13 @@ package com.pavan.github.estatemanagementsystem.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class UserAuth extends DateAttribute{
+public class UserAuth extends DateAttribute {
 
     @Id
     private String userId;
@@ -16,5 +17,5 @@ public class UserAuth extends DateAttribute{
     private String active;
     private String previousPassword;
     private boolean locked;
-    
+
 }

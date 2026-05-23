@@ -28,7 +28,7 @@ public class SequenceServiceImp implements SequenceService {
             newSequenceId = nextSequenceItem.getSequenceNumber();
             newSequenceId = new BigDecimal(newSequenceId).add(BigDecimal.ONE).toString();
             nextSequenceItem.setSequenceNumber(newSequenceId);
-        }else {
+        } else {
             SequenceItem nextSequenceItem = new SequenceItem();
             nextSequenceItem.setSequenceNumber(newSequenceId);
             nextSequenceItem.setSequenceId(sequenceName);

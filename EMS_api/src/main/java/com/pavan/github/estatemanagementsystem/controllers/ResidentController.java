@@ -1,9 +1,9 @@
 package com.pavan.github.estatemanagementsystem.controllers;
 
 import com.pavan.github.estatemanagementsystem.constants.UrlConstants;
-import com.pavan.github.estatemanagementsystem.dto.response.CommonResponseDto;
-import com.pavan.github.estatemanagementsystem.dto.ResidentsListDto;
 import com.pavan.github.estatemanagementsystem.dto.ResidentDto;
+import com.pavan.github.estatemanagementsystem.dto.ResidentsListDto;
+import com.pavan.github.estatemanagementsystem.dto.response.CommonResponseDto;
 import com.pavan.github.estatemanagementsystem.services.ResidentService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +38,7 @@ public class ResidentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CommonResponseDto<String>> updateResident(@PathVariable String id,@RequestBody ResidentDto residentDto) {
+    public ResponseEntity<CommonResponseDto<String>> updateResident(@PathVariable String id, @RequestBody ResidentDto residentDto) {
         return residentService.updateResident(id, residentDto);
     }
 }

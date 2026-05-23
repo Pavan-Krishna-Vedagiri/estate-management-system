@@ -1,6 +1,5 @@
 package com.pavan.github.estatemanagementsystem.dto.request;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data

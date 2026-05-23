@@ -12,7 +12,7 @@ export class CommonApiService {
   constructor(private http : HttpClient){}
 
   get(url : string, params?: any) : Observable<any>{
-    return this.http.get(this.apiUrl + url);
+    return this.http.get(this.apiUrl + url, params);
   }
 
   post<T>(url : string, body : any){

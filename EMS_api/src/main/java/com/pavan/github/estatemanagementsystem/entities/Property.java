@@ -3,16 +3,18 @@ package com.pavan.github.estatemanagementsystem.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "property")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Property {
+public class Property extends DateAttribute {
 
     @Id
     @Column(name = "property_id", length = 20)

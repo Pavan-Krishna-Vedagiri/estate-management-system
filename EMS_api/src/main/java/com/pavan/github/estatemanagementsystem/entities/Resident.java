@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Resident extends DateAttribute{
+public class Resident extends DateAttribute {
 
     @Id
     private String id;

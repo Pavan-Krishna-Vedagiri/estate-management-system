@@ -12,7 +12,7 @@ public class CommonResponseDto<T> {
     private String responseId;
     private String status;
     private String message;
-    private T  data;
+    private T data;
     private Date timestamp;
 
 }
