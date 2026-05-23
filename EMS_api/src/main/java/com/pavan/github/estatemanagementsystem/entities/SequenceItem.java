@@ -14,6 +14,6 @@ public class SequenceItem extends DateAttribute{
 
     @Id
     private String sequenceId;
-    private BigDecimal sequenceNumber ;
+    private String sequenceNumber ;
 
 }

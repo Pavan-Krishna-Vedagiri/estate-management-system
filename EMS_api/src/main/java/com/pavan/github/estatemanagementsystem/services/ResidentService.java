@@ -78,8 +78,9 @@ public class ResidentService {
         Resident newResident = objectMapper.convertValue(resident, Resident.class);
         newResident.setId(sequenceService.nextSequenceValue("RESIDENT_SEQUENCE"));
         newResident.getAddress().setAddressId(sequenceService.nextSequenceValue("ADDRESS_SEQUENCE"));
-        newResident = residentRepo.save(newResident);
-        data.put("residentId",newResident.getId());
+        newResident.setCreatedStamp(new Date());
+        newResident.setLastUpdatedStamp(new Date());
+        residentRepo.save(newResident);
         CommonResponseDto<Map<String, String>> response = CommonResponseDto.<Map<String, String>>builder()
                 .responseId(UUID.randomUUID().toString())
                 .status(ResponseConstants.SUCCESS)
@@ -91,11 +92,23 @@ public class ResidentService {
 
     }
 
-//    public Resident updateResident(Resident resident) {
-//        if (residentRepo.existsById(resident.getId())) {
-//            return residentRepo.save(resident);
-//        }
-//        return null;
-//    }
+    public ResponseEntity<CommonResponseDto<String>> updateResident(String id, ResidentDto residentDto) {
+        Optional<Resident> optionalResident = residentRepo.findById(id);
+        String responseMessage = "Update Resident Failed";
+        if (optionalResident.isPresent()) {
+            Resident resident = optionalResident.get();
+            resident.setId(id);
+            resident = objectMapper.convertValue(residentDto, Resident.class);
+            residentRepo.save(resident);
+            responseMessage = "Update Resident Successfully";
+        }
+        CommonResponseDto<String> responseDto = CommonResponseDto.<String>builder()
+                .responseId(UUID.randomUUID().toString())
+                .status(ResponseConstants.SUCCESS)
+                .message(responseMessage)
+                .timestamp(new Date())
+                .build();
+        return ResponseEntity.ok(responseDto);
+    }
 
 }

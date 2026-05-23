@@ -36,5 +36,10 @@ public class ResidentController {
     public ResponseEntity<CommonResponseDto<Map<String, String>>> createResident(@RequestBody ResidentDto residentDto) {
         return residentService.addResident(residentDto);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CommonResponseDto<String>> updateResident(@PathVariable String id,@RequestBody ResidentDto residentDto) {
+        return residentService.updateResident(id, residentDto);
+    }
 }
 

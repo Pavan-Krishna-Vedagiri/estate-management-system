@@ -21,7 +21,7 @@ public class Resident extends DateAttribute{
     private String socialSecurityNumber;
     private String occupationName;
     private String companyName;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 

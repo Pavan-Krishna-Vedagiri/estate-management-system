@@ -1,27 +1,20 @@
-<button (click)="navigateCreateResident()">Create resident</button>
+<main class="main-content">
+    <header class="header">
+        <h1>Welcome, Admin</h1>
+    </header>
 
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th> edit </th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (resident of residents$ | async; track resident.id) {
-        <tr>
-            <td>{{resident.id}}</td>
-            <td>{{resident.firstName}}</td>
-            <td>{{resident.lastName}}</td>
-            <td><button (click)="getResident(resident.id)">//</button></td>
-        </tr>
-        }
-    </tbody>
-</table>
-
-@if (resident$ | async; as resident) {
-    <p>Individual data</p>
-    <p> {{ resident.firstName }} + {{ resident.address.doorNo }}</p>
-}
+    <section class="cards">
+        <div class="card">
+            <h3>Total Residents</h3>
+            <p>{{ totalResidents }}</p>
+        </div>
+        <div class="card">
+            <h3>Pending Requests</h3>
+            <p>{{ pendingRequests }}</p>
+        </div>
+        <div class="card">
+            <h3>Revenue</h3>
+            <p>₹ {{ revenue }}</p>
+        </div>
+    </section>
+</main>

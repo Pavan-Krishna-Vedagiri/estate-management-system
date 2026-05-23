@@ -22,17 +22,18 @@ public class SequenceServiceImp implements SequenceService {
     public String nextSequenceValue(String sequenceName) {
         Optional<SequenceItem> sequenceItem = sequenceItemRepo.findById(sequenceName);
 
-        BigDecimal newSequenceId = BigDecimal.valueOf(10000);
+        String newSequenceId = String.valueOf(BigDecimal.valueOf(10000));
         if (sequenceItem.isPresent()) {
             SequenceItem nextSequenceItem = sequenceItem.get();
             newSequenceId = nextSequenceItem.getSequenceNumber();
-            nextSequenceItem.setSequenceNumber(newSequenceId.add(BigDecimal.ONE));
+            newSequenceId = new BigDecimal(newSequenceId).add(BigDecimal.ONE).toString();
+            nextSequenceItem.setSequenceNumber(newSequenceId);
         }else {
             SequenceItem nextSequenceItem = new SequenceItem();
-            nextSequenceItem.setSequenceNumber(newSequenceId.add(BigDecimal.ONE));
+            nextSequenceItem.setSequenceNumber(newSequenceId);
             nextSequenceItem.setSequenceId(sequenceName);
             sequenceItemRepo.save(nextSequenceItem);
         }
-        return newSequenceId.toPlainString();
+        return newSequenceId;
     }
 }
