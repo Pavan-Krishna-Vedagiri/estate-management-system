@@ -8,3 +8,7 @@
     color: green !important;
     font-weight: 700;
 }
+
+.btn-disabled{
+    background-color: rgba(0, 0, 0, 0.607) !important;
+}

@@ -4,7 +4,7 @@ import { Room } from '../../../../shared/models/Room';
 import { CommonApiService } from '../../../../core/services/common-api-service';
 import { ActivatedRoute } from '@angular/router';
 import { RoomBooking } from '../../../../shared/models/RoomBooking';
-import { forkJoin, map, Observable, switchMap } from 'rxjs';
+import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -38,13 +38,18 @@ export class ViewRoomDetailComponent {
         const roomId = params.get('roomId')!;
         return this.apiService.get(`/bookings/${roomId}`).pipe(
           switchMap((res: any) => {
-            const bookings: RoomBooking[] = res.data;
-            const residentCalls = bookings.map(b =>
-              this.apiService.get(`/residents/${b.residentId}`)
-            );
-            return forkJoin(residentCalls).pipe(
-              map(residentsData => residentsData.map(r => r.data as Resident))
-            );
+            if (res.data) {
+
+              const bookings: RoomBooking[] = res.data;
+              const residentCalls = bookings.map(b =>
+                this.apiService.get(`/residents/${b.residentId}`)
+              );
+              return forkJoin(residentCalls).pipe(
+                map(residentsData => residentsData.map(r => r.data as Resident))
+              );
+            }else{
+              return of([] as Resident[])
+            }
           })
         );
       })

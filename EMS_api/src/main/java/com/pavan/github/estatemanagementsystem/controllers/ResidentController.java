@@ -1,6 +1,7 @@
 package com.pavan.github.estatemanagementsystem.controllers;
 
 import com.pavan.github.estatemanagementsystem.constants.UrlConstants;
+import com.pavan.github.estatemanagementsystem.dto.PagedResponse;
 import com.pavan.github.estatemanagementsystem.dto.ResidentDto;
 import com.pavan.github.estatemanagementsystem.dto.ResidentsListDto;
 import com.pavan.github.estatemanagementsystem.dto.response.CommonResponseDto;
@@ -28,8 +29,8 @@ public class ResidentController {
     }
 
     @GetMapping()
-    public ResponseEntity<CommonResponseDto<ResidentsListDto>> getAllResidents() {
-        return residentService.findAll();
+    public ResponseEntity<CommonResponseDto<PagedResponse<ResidentDto>>> getAllResidents(@RequestParam String pageSize, @RequestParam String pageNumber) {
+        return residentService.getAllResidents();
     }
 
     @PostMapping()

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CreateResidentComponent } from './create-resident-component/create-resident-component';
 import { ResidentRoutingModule } from './resident-routing-module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PagingComponent } from '../../shared/paging-component/paging-component'
 
 
 
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     CreateResidentComponent,
     ResidentRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PagingComponent
   ]
 })
 export class ResidentModule { }

@@ -16,8 +16,8 @@
             </tr>
         </thead>
         <tbody>
-            @if (residents$ | async; as resident ) {
-            @for (resident of residents$ | async; track resident.id) {
+            @if (residents$ | async; as residents ) {
+            @for (resident of residents; track resident.id) {
             <tr>
                 <td>{{ resident.id }}</td>
                 <td>{{ resident.firstName }} {{ resident.lastName }}</td>
@@ -42,3 +42,4 @@
         </tbody>
     </table>
 </div>
+<app-paging-component ></app-paging-component>

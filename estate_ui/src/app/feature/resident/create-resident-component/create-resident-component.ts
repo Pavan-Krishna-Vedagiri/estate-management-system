@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, input, Output } from '@angular/core';
 import { CommonApiService } from '../../../core/services/common-api-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Resident } from '../../../shared/models/Resident';
@@ -17,11 +17,12 @@ export class CreateResidentComponent {
 
   residentForm !: FormGroup;
   readonly residentData !: Resident;
+  @Input() roomId !: string;
 
-  showPopup : boolean = false;
-  responseMessage : string = "";
+  showPopup: boolean = false;
+  responseMessage: string = "";
 
-  constructor(private commonApiService: CommonApiService, private fb: FormBuilder, private router : Router, private cd : ChangeDetectorRef) {
+  constructor(private commonApiService: CommonApiService, private fb: FormBuilder, private router: Router, private cd: ChangeDetectorRef) {
     this.residentData = {
       id: "",
       firstName: 'Ravi',
@@ -76,7 +77,7 @@ export class CreateResidentComponent {
       const resident: Resident = this.residentForm.value;
       const resp = this.commonApiService.post("/residents", resident);
       console.log(resp.subscribe({
-        next: (data : any) => {
+        next: (data: any) => {
           console.log(data);
           this.responseMessage = data.message;
           this.cd.detectChanges();
@@ -100,9 +101,14 @@ export class CreateResidentComponent {
     this.residentForm.patchValue(this.residentData);
   }
 
-  closeMessagePop(eventValue :boolean){
+  closeMessagePop(eventValue: boolean) {
     this.showPopup = eventValue;
     this.router.navigate(['/dashboard'])
   }
 
+  @Output() sendResidentDetails : EventEmitter<Resident> = new EventEmitter<Resident>();
+  sendResidentDetailsFn() {
+    const resident : Resident = this.residentForm.value;
+    this.sendResidentDetails.emit(resident);
+  }
 }

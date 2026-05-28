@@ -1,5 +1,6 @@
 package com.pavan.github.estatemanagementsystem.security;
 
+import com.pavan.github.estatemanagementsystem.constants.UrlConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

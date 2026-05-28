@@ -1,5 +1,6 @@
 package com.pavan.github.estatemanagementsystem.controllers;
 
+import com.pavan.github.estatemanagementsystem.constants.UrlConstants;
 import com.pavan.github.estatemanagementsystem.dto.request.AuthRequestDto;
 import com.pavan.github.estatemanagementsystem.dto.response.AuthResponseDto;
 import com.pavan.github.estatemanagementsystem.security.JwtUtil;
@@ -12,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(UrlConstants.AUTH_URL)
 @CrossOrigin(origins = "*")
 public class AuthController {
 

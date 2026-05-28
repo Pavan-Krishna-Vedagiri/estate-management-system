@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { Resident } from '../../../shared/models/Resident';
 import { AuthService } from '../../../core/auth/auth-service';
 import { Router } from '@angular/router';
 import { CommonApiService } from '../../../core/services/common-api-service';
 import { AsyncPipe } from '@angular/common';
+import { PagingComponent } from '../../../shared/paging-component/paging-component';
 
 @Component({
   selector: 'app-resident-list-component',
-  imports: [ AsyncPipe],
+  imports: [ AsyncPipe, PagingComponent],
   templateUrl: './resident-list-component.html',
   styleUrl: './resident-list-component.css',
 })

@@ -3,6 +3,8 @@ package com.pavan.github.estatemanagementsystem.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pavan.github.estatemanagementsystem.constants.ResponseConstants;
+import com.pavan.github.estatemanagementsystem.dto.PagedResponse;
+import com.pavan.github.estatemanagementsystem.dto.PagingTo;
 import com.pavan.github.estatemanagementsystem.dto.ResidentDto;
 import com.pavan.github.estatemanagementsystem.dto.ResidentsListDto;
 import com.pavan.github.estatemanagementsystem.dto.response.CommonResponseDto;
@@ -31,28 +33,30 @@ public class ResidentService {
         this.sequenceService = sequenceService;
     }
 
-    public ResponseEntity<CommonResponseDto<ResidentsListDto>> findAll() {
+    public ResponseEntity<CommonResponseDto<PagedResponse<ResidentDto>>> getAllResidents() {
 
         Pageable pageable = PageRequest.of(0, 10);
-        Page<Resident> residents = residentRepo.findAll(pageable);
-        System.out.printf("""
-                page :{
-                    totalPages : %s,
-                    totalElements : %s,
-                    pageNumber : %s,
-                    pageSize : %s
-                }
-                """, residents.getTotalPages(), residents.getTotalElements(), residents.getNumber(), residents.getSize());
+        Page<Resident> page = residentRepo.findAll(pageable);
         ResidentsListDto residentsListDto = new ResidentsListDto();
-        List<ResidentDto> responseDtos = objectMapper.convertValue(residents.get(), new TypeReference<List<ResidentDto>>() {
+        List<ResidentDto> responseDtos = objectMapper.convertValue(page.get(), new TypeReference<List<ResidentDto>>() {
         });
+        PagingTo pagedResponse = PagingTo.builder()
+                .pageNumber(page.getNumber())
+                .pageSize(page.getSize())
+                .totalPages(page.getTotalPages())
+                .totalElements(page.getNumberOfElements())
+                .build();
+        PagedResponse<ResidentDto> residentDtoPagedResponse = PagedResponse.<ResidentDto>builder()
+                .pagingTo(pagedResponse)
+                .items(responseDtos)
+                .build();
         residentsListDto.setResidents(responseDtos);
-        CommonResponseDto<ResidentsListDto> response = CommonResponseDto.<ResidentsListDto>builder()
+        CommonResponseDto<PagedResponse<ResidentDto>> response = CommonResponseDto.<PagedResponse<ResidentDto>>builder()
                 .responseId(UUID.randomUUID().toString())
                 .status(ResponseConstants.SUCCESS)
                 .message("Residents fetch successfully")
                 .timestamp(new Date(System.currentTimeMillis()))
-                .data(residentsListDto)
+                .data(residentDtoPagedResponse)
                 .build();
         return ResponseEntity.ok(response);
     }
