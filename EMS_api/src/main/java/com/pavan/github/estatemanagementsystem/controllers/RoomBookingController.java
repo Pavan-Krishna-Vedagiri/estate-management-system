@@ -26,4 +26,9 @@ public class RoomBookingController {
     public ResponseEntity<CommonResponseDto<List<RoomBookingsDto>>> getBookingDetail(@PathVariable String roomId) {
         return roomBookingService.getBookingDetails(roomId);
     }
+
+    @GetMapping("/total-revenue")
+    public ResponseEntity<CommonResponseDto<String>> getTotalRevenue() {
+        return roomBookingService.getTotalRevenue();
+    }
 }

@@ -97,4 +97,17 @@ public class RoomBookingServiceImpl implements RoomBookingService {
                 .build();
         return ResponseEntity.ok(responseDto);
     };
+
+    public ResponseEntity<CommonResponseDto<String>> getTotalRevenue() {
+        String responseMessage = "No revenue";
+        String revenue = roomBookingsRepo.findTotalRevenue();
+        CommonResponseDto<String> responseDto = CommonResponseDto.<String>builder()
+                .responseId(UUID.randomUUID().toString())
+                .message(responseMessage)
+                .timestamp(new Date())
+                .status(ResponseConstants.SUCCESS)
+                .data(revenue == null ? "0" : revenue)
+                .build();
+        return ResponseEntity.ok(responseDto);
+    }
 }

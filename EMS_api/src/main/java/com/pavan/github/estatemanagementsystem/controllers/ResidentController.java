@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,8 +30,13 @@ public class ResidentController {
     }
 
     @GetMapping()
-    public ResponseEntity<CommonResponseDto<PagedResponse<ResidentDto>>> getAllResidents(@RequestParam String pageSize, @RequestParam String pageNumber) {
-        return residentService.getAllResidents();
+    public ResponseEntity<CommonResponseDto<PagedResponse<ResidentDto>>> getAllResidents(@RequestParam int pageNumber, @RequestParam int pageSize) {
+        return residentService.getAllResidents(pageNumber, pageSize);
+    }
+
+    @GetMapping("/total-residents")
+    public ResponseEntity<CommonResponseDto<String>> getTotalResidents() {
+        return residentService.getTotalResidents();
     }
 
     @PostMapping()

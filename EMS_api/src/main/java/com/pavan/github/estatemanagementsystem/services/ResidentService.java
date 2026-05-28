@@ -33,9 +33,9 @@ public class ResidentService {
         this.sequenceService = sequenceService;
     }
 
-    public ResponseEntity<CommonResponseDto<PagedResponse<ResidentDto>>> getAllResidents() {
+    public ResponseEntity<CommonResponseDto<PagedResponse<ResidentDto>>> getAllResidents(int pageNumber, int pageSize) {
 
-        Pageable pageable = PageRequest.of(0, 10);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Resident> page = residentRepo.findAll(pageable);
         ResidentsListDto residentsListDto = new ResidentsListDto();
         List<ResidentDto> responseDtos = objectMapper.convertValue(page.get(), new TypeReference<List<ResidentDto>>() {
@@ -111,6 +111,18 @@ public class ResidentService {
                 .status(ResponseConstants.SUCCESS)
                 .message(responseMessage)
                 .timestamp(new Date())
+                .build();
+        return ResponseEntity.ok(responseDto);
+    }
+
+    public ResponseEntity<CommonResponseDto<String>> getTotalResidents() {
+        String totalResidents = String.valueOf(residentRepo.findAll().size());
+        CommonResponseDto<String> responseDto = CommonResponseDto.<String>builder()
+                .responseId(UUID.randomUUID().toString())
+                .status(ResponseConstants.SUCCESS)
+                .message("Total Residents fetch successfully")
+                .timestamp(new Date(System.currentTimeMillis()))
+                .data(totalResidents)
                 .build();
         return ResponseEntity.ok(responseDto);
     }

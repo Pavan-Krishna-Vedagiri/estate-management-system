@@ -13,4 +13,5 @@ public interface RoomBookingService {
 
     public ResponseEntity<CommonResponseDto<String>> bookRoom(String roomId, ResidentDto residentDto);
 
+    public ResponseEntity<CommonResponseDto<String>> getTotalRevenue();
 }

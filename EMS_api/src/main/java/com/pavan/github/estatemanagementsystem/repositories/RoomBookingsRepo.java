@@ -2,6 +2,7 @@ package com.pavan.github.estatemanagementsystem.repositories;
 
 import com.pavan.github.estatemanagementsystem.entities.RoomBookings;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,5 +14,8 @@ public interface RoomBookingsRepo extends JpaRepository<RoomBookings, String> {
     public Optional<RoomBookings> findByRoomIdAndResidentId(String roomId, String residentId);
 
     public List<RoomBookings> findByRoomId(String roomId);
+
+    @Query("SELECT SUM(r.rentAmount) FROM RoomBookings r WHERE r.status = 'ACTIVE'")
+    public String findTotalRevenue();
 
 }
